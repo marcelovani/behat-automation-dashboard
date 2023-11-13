@@ -1,0 +1,10 @@
+main:
+  css:
+    base:
+      css/main.css: {}
+
+  js:
+    js/main.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

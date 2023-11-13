@@ -1,0 +1,94 @@
+#matrix, h1, #legend, #failures {
+  width: 530px;
+  margin: 0 auto;
+}
+
+#matrix .site {
+  margin: 5px;
+}
+
+#matrix .brand-container {
+  float: left;
+  clear: both;
+}
+
+#matrix table, #matrix th, #matrix td {
+  border: 1px solid;
+}
+
+#matrix th, #matrix td {
+  margin: 8px;
+  width: 50px;
+}
+
+#matrix td img, #legend li img {
+  height: 25px;
+  width: 25px;
+  margin: 0 auto;
+  display: block;
+}
+
+#legend ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#legend li span {
+  display: block;
+}
+
+#legend li img {
+  margin: 0;
+  display: inline;
+}
+
+#legend li span {
+  display: inline;
+}
+
+#matrix .failed {
+  color: darkred;
+  padding-top: 3px;
+  display: block;
+  float: left;
+  padding-left: 4px;
+  font-size: 13pt;
+  cursor: pointer;
+}
+
+#matrix .failed a {
+  text-decoration: none;
+}
+
+#failures .failure {
+  background: #ecad9f;
+  margin-bottom: 15px;
+  padding: 3px;
+}
+
+#failures .failure .scenario,
+#failures .failure .steps,
+#failures .failure .step {
+  background: #eacec8;
+  padding: 2px;
+}
+
+#failures .failure .step {
+  padding-left: 15px;
+}
+
+#failures .failure .scenario blockquote {
+  margin-left: 5px;
+  margin-top: 5px;
+  border-left: 2px solid gray;
+  padding-left: 6px;
+}
+
+#failures .error_message {
+  color: white;
+  background: black;
+  margin: 2px;
+  padding: 6px;
+  border: 1px solid red;
+}

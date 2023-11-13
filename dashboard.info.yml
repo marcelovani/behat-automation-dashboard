@@ -1,0 +1,10 @@
+name: 'Dashboard'
+package: 'Testing'
+description: 'Automation dashboard.'
+core_version_requirement: ^10
+type: module
+dependencies:
+  - drupal:rest
+  - restui:restui
+  - drupal:serialization
+  - config_rewrite:config_rewrite
