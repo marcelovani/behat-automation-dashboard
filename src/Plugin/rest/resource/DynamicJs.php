@@ -188,7 +188,7 @@ class DynamicJs extends ResourceBase {
       $script .= "jQuery('$locator img').css('float', 'left');\n";
 
       // Add anchor.
-      $script .= "var anchor = jQuery('<div>').attr('id', 'failures-$brand_market');\n";
+      $script .= "var anchor = jQuery('<a>').attr('name', 'failures-$brand_market');\n";
       $script .= "jQuery(anchor).appendTo(jQuery('#failures'));\n";
 
       // Append failed scenarios.
