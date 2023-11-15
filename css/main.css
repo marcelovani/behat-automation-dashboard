@@ -1,5 +1,10 @@
-#matrix, h1, #legend, #failures {
+#matrix, h1, #legend {
   width: 530px;
+  margin: 0 auto;
+}
+
+#failures {
+  width: 630px;
   margin: 0 auto;
 }
 

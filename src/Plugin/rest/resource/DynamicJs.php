@@ -197,13 +197,15 @@ class DynamicJs extends ResourceBase {
         //@todo create a helper function for appending.
         $script .= "var failure = jQuery('<div>').addClass('failure').addClass('$brand_market').text('$feature_name ($brand_market)');\n";
         $script .= "jQuery(failure).appendTo(jQuery('#failures'));\n";
+        $script .= "var dateTime = jQuery('<div>').addClass('failure').addClass('$brand_market').text(lastRunJob);\n";
+        $script .= "jQuery(dateTime).appendTo(jQuery('#failures .failure.$brand_market'));\n";
 
         // Loop scenarios.
         foreach ($scenarios as $scenario_name => $scenario) {
           // Append scenario.
           $line = $scenario['line'];
           $class = $this->clean_class($scenario_name . $line);
-          $script .= "var scenario = jQuery('<div>').addClass('scenario').addClass('$class').html('<strong>Line $line: $scenario_name</strong>');\n";
+          $script .= "var scenario = jQuery('<div>').addClass('scenario').addClass('$class').html('<strong>$scenario_name</strong>');\n";
           $script .= "jQuery(scenario).appendTo(jQuery('.failure.$brand_market'));\n";
 
           // Append description.
