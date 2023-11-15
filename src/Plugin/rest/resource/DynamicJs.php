@@ -117,6 +117,7 @@ class DynamicJs extends ResourceBase {
     $event = $payload->get('event');
     $brand = $payload->get('brand');
     $market = $payload->get('market');
+    $device = $payload->get('device');
     $features = $payload->all('scenarios');
     $brand_market = "$brand-$market";
 
@@ -195,7 +196,7 @@ class DynamicJs extends ResourceBase {
       foreach ($features as $feature_name => $scenarios) {
         // Append to failures list.
         //@todo create a helper function for appending.
-        $script .= "var failure = jQuery('<div>').addClass('failure').addClass('$brand_market').text('$feature_name ($brand_market)');\n";
+        $script .= "var failure = jQuery('<div>').addClass('failure').addClass('$brand_market').text('$feature_name ($brand_market) on $device');\n";
         $script .= "jQuery(failure).appendTo(jQuery('#failures'));\n";
         $script .= "var dateTime = jQuery('<div>').addClass('failure').addClass('$brand_market').text(lastRunJob);\n";
         $script .= "jQuery(dateTime).appendTo(jQuery('#failures .failure.$brand_market'));\n";
