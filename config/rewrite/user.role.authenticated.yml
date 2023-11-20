@@ -1,3 +1,4 @@
 permissions:
   - 'restful post dynamic_js'
+  - 'restful post screenshot_upload'
   - 'access dashboard'
