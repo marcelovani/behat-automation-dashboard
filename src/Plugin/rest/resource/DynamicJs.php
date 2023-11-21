@@ -197,7 +197,7 @@ class DynamicJs extends ResourceBase {
         //@todo create a helper function for appending.
         $script .= "var failure = jQuery('<div>').addClass('failure').addClass('$brand_market').text('$feature_name ($brand_market) on $device');\n";
         $script .= "jQuery(failure).appendTo(jQuery('#failures'));\n";
-        $script .= "var dateTime = jQuery('<div>').addClass('failure').addClass('$brand_market').text(lastRunJob);\n";
+        $script .= "var dateTime = jQuery('<div>').addClass('date').addClass('$brand_market').text(lastRunJob);\n";
         $script .= "jQuery(dateTime).appendTo(jQuery('#failures .failure.$brand_market'));\n";
 
         // Loop scenarios.
@@ -228,6 +228,11 @@ class DynamicJs extends ResourceBase {
           $error_message = str_replace(["\r\n", "\n", "\r"], "", $error_message);
           $script .= "var errorMsg = jQuery('<div>').addClass('error_message').text('$error_message');\n";
           $script .= "jQuery(errorMsg).appendTo(jQuery('.failure.$brand_market .scenario.$class'));\n";
+
+          foreach ($scenario['screenshots'] as $screenshot) {
+            $script .= "var screenshot = jQuery('<img>').attr('src', '/sites/default/files/$screenshot');\n";
+            $script .= "jQuery(screenshot).appendTo(jQuery('.failure.$brand_market .scenario.$class .error_message'));\n";
+          }
 
           // Add horizontal bar
           $script .= "var bar = jQuery('<hr>');\n";
