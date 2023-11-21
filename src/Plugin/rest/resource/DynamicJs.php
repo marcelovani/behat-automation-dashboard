@@ -224,7 +224,7 @@ class DynamicJs extends ResourceBase {
             }
           }
 
-          $error_message = str_replace('"', '\"', $scenario['error_message']);
+          $error_message = str_replace(["'", '"'], ["\'", '\"'], $scenario['error_message']);
           $script .= "var errorMsg = jQuery('<div>').addClass('error_message').text('$error_message');\n";
           $script .= "jQuery(errorMsg).appendTo(jQuery('.failure.$brand_market .scenario.$class'));\n";
 
