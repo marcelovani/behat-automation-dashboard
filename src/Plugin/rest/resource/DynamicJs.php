@@ -180,7 +180,6 @@ class DynamicJs extends ResourceBase {
 
       // Add a link with count.
       $script .= "var link = jQuery('<a>').attr('href', '#failures-$brand_market').attr('title', 'Last run:' + lastRunJob).text('$count');\n";
-      $script .= "console.log(link);\n";
       $script .= "var failed = jQuery('<div>').addClass('failed');\n";
       $script .= "jQuery(failed).appendTo(jQuery('$locator'));\n";
       $script .= "jQuery(link).appendTo(jQuery('$locator .failed'));\n";
