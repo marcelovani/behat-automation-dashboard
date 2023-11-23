@@ -11,5 +11,7 @@ main:
 
 dashboard.failures:
   version: 1.x
+  # Specify that this library is a Handlebars template.
+  type: handlebars_template
   js:
     templates/dashboard.failures.handlebars: {}
