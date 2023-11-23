@@ -121,14 +121,16 @@ function updateMatrix(brand, market) {
     }
 
     // Add link to failures.
-    var count = Object.keys(data.scenarios).length;
-    var float = '';
-    if (count > 0) {
-      float = 'float-left';
-      var link = jQuery('<a>').attr('href', '#failures-' + brand + '-' + market).attr('title', 'Last run:' + data.lastRun).text(count);
-      var failed = jQuery('<div>').addClass('failed');
-      jQuery(failed).appendTo(jQuery(matrixTarget));
-      jQuery(link).appendTo(jQuery(matrixTarget + ' .failed'));
+    if (data.scenarios) {
+      var count = Object.keys(data.scenarios).length;
+      var float = '';
+      if (count > 0) {
+        float = 'float-left';
+        var link = jQuery('<a>').attr('href', '#failures-' + brand + '-' + market).attr('title', 'Last run:' + data.lastRun).text(count);
+        var failed = jQuery('<div>').addClass('failed');
+        jQuery(failed).appendTo(jQuery(matrixTarget));
+        jQuery(link).appendTo(jQuery(matrixTarget + ' .failed'));
+      }
     }
 
     // Update image.
