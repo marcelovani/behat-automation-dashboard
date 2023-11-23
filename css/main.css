@@ -3,9 +3,17 @@
   margin: 0 auto;
 }
 
+ #failures h3 {
+  margin: 1px;
+}
+
 #failures {
   width: 630px;
   margin: 0 auto;
+}
+
+#failures ol {
+  list-style-position: inside;
 }
 
 #matrix .site {
@@ -96,4 +104,8 @@
   margin: 2px;
   padding: 6px;
   border: 1px solid red;
+}
+
+.float-left {
+  float: left;
 }

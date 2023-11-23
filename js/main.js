@@ -27,9 +27,19 @@ var brandMarkets = {
 };
 
 document.addEventListener("DOMContentLoaded", function(event) {
+  registerHandlebarsHelpers();
   createTable('#matrix');
-  update('#matrix');
+  scrollToHash();
 });
+
+/**
+ * Register custom Handlebars helpers.
+ */
+function registerHandlebarsHelpers() {
+  Handlebars.registerHelper('clrfToBr', (str, args, options) => {
+    return str.replace(/(?:\r\n|\r|\n)/g, '<br>');
+  });
+}
 
 /**
  * Creates the table of brand and markets.
@@ -68,7 +78,7 @@ function createTable(container) {
       if (market.trim().length > 0) {
         var img = jQuery('<img>').attr('src', '/modules/custom/dashboard/images/yellow.png');
         jQuery(img).appendTo(td);
-        addSiteJs(brand, market);
+        updateMatrix(brand, market);
       }
     });
   })
@@ -77,42 +87,58 @@ function createTable(container) {
 }
 
 /**
- * Helper to append the js for each site.
+ * Helper load json and update matrix for each brand and market.
  *
  * @param brand
  *   The brand.
  * @param market
  *   The market.
  */
-function addSiteJs(brand, market) {
-  let scrTag = document.createElement("script");
+function updateMatrix(brand, market) {
+  var matrixTarget = '#matrix .' + brand + '-' + market;
   let r = (Math.random() + 1).toString(36).substring(7);
-  scrTag.setAttribute("src", '/sites/default/files/' + brand + '-' + market + '.js?rnd=' + r);
-  scrTag.setAttribute("type", "text/javascript");
-  // @todo async is causing issues with the order of the assets
-  scrTag.setAttribute("async", true);
-  document.body.appendChild(scrTag);
-}
+  jQuery.getJSON('/sites/default/files/' + brand + '-' + market + '.json?rnd=' + r, function(data) {
+    switch (data.event) {
+      case 'suite_started':
+        var icon = 'wip';
+        break;
 
-/**
- * Updates build status.
- *
- * @param container
- */
-function update(container) {
-  // Status should expire in one hour.
-  var threshold = 60 * 60;
-  // Check every 10 seconds.
-  var frequency = 10;
+      case 'suite_finished':
+        if (data.outcome == 'passed') {
+          var icon = 'green';
+        }
+        else {
+          var icon = 'red';
+        }
+        break;
 
-  var dt = new Date();
-  var isoDate = toIsoString(dt);
+      case 'scenario_failed':
+        var icon = 'red';
+        break;
 
-  // Loop each available site and check last update.
-  // If the last update is older than the threshold, change the icon to yellow.
-  // @todo Make this work and add an infinite timer every N seconds.
-  Object.keys(sites).forEach((site, index) => {
-    console.log(site + ' last run ' + lastRun[site] + ' vs ' + isoDate);
+      default:
+        console.error('Unknown event ' + data.event);
+    }
+
+    // Add link to failures.
+    var count = Object.keys(data.scenarios).length;
+    var float = '';
+    if (count > 0) {
+      float = 'float-left';
+      var link = jQuery('<a>').attr('href', '#failures-' + brand + '-' + market).attr('title', 'Last run:' + data.lastRun).text(count);
+      var failed = jQuery('<div>').addClass('failed');
+      jQuery(failed).appendTo(jQuery(matrixTarget));
+      jQuery(link).appendTo(jQuery(matrixTarget + ' .failed'));
+    }
+
+    // Update image.
+    var src = '/modules/custom/dashboard/images/' + icon + '.png';
+    jQuery(matrixTarget + ' img').addClass(float).attr('title', 'Last run: ' + data.lastRun).attr('src', src);
+
+    // Append failures.
+    var html = handlebarsRenderer.render('dashboard.failures', data);
+    var failures = jQuery('<span>').addClass('item').html(html);
+    jQuery(failures).appendTo(jQuery('#failures .list'));
   });
 }
 
@@ -142,3 +168,20 @@ function toIsoString(date) {
     ':' + pad(Math.abs(tzo) % 60);
 }
 
+/**
+ * Helper to scroll to hash from url.
+ */
+function scrollToHash() {
+  setTimeout(() => {
+    var hash = document.URL.substr(document.URL.indexOf('#') + 1);
+    var el = jQuery(`a[name=${hash}]`);
+    if (el) {
+      jQuery('html, body').animate({
+        scrollTop: el.offset().top
+      }, 'slow');
+    }
+    else {
+      console.log('Cannot scroll to hash');
+    }
+  }, 2000);
+}

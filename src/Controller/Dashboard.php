@@ -42,7 +42,7 @@ class Dashboard extends ControllerBase
                       </ul>
                     </div>
                     <div id="failures">
-                        <h3>Failures</h3>
+                        <h2>Failures</h2>
                         <div class="list"></div>
                     </div>
                     ',

@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
  * )
  */
 class ScreenshotUpload extends ResourceBase {
+
   /**
    * Creates a file from an endpoint.
    *

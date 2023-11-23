@@ -8,3 +8,8 @@ main:
   dependencies:
     - core/jquery
     - core/drupal
+
+dashboard.failures:
+  version: 1.x
+  js:
+    templates/dashboard.failures.handlebars: {}

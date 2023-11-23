@@ -1,0 +1,38 @@
+{{#if (eq this.event "scenario_failed")}}
+<section id="failures-{{ this.brand }}-{{ this.market }}">
+  <div class="failure {{ this.brand }}-{{ this.market }}">
+    {{#each this.scenarios as | scenarios scenarioTitle | }}
+      <h3>{{scenarioTitle}} ({{ @root.brand }}-{{ @root.market }}) on {{ @root.device }}</h3>
+      <span class="date">Last run: {{ @root.lastRun }}</span>
+      <div class="scenarios">
+        {{#each scenarios as | scenario scenarioTitle | }}
+        <div class="scenario">
+          <strong>{{ scenarioTitle }}</strong>
+          <blockquote>{{{clrfToBr scenario.description }}}</blockquote>
+
+          <ol class="steps">
+            {{#each scenario.steps as | stepTitle | }}
+              <li class="step">{{ stepTitle }}</li>
+            {{/each}}
+          </ol>
+
+          <strong>Error message</strong>
+          <div class="error_message">{{{clrfToBr this.error_message }}}</div>
+
+          <div class="screenshots">
+            <strong>Screenshots</strong>
+            {{#each scenario.screenshots as | src | }}
+              <a href="/sites/default/files/{{ src }}" target="_blank">
+                <img class="screenshot" src="/sites/default/files/{{ src }}"><br/>
+              </a>
+            {{/each}}
+          </div>
+
+          <div class="feature_file"><strong>Feature</strong> {{{ this.feature_file }}}</div>
+        </div>
+        {{/each}}
+      </div>
+    {{/each}}
+  </div>
+</section>
+{{/if}}
