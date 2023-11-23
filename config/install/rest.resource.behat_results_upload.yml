@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - dashboard
+    - serialization
+    - user
+id: behat_results_upload
+plugin_id: behat_results_upload
+granularity: resource
+configuration:
+  methods:
+    - POST
+  formats:
+    - json
+  authentication:
+    - cookie
