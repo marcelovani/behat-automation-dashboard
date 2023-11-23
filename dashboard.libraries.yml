@@ -4,6 +4,8 @@ main:
       css/main.css: {}
 
   js:
+    js/global.js: {}
+    js/handlebars_helpers.js: {}
     js/main.js: {}
   dependencies:
     - core/jquery

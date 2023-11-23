@@ -27,19 +27,9 @@ var brandMarkets = {
 };
 
 document.addEventListener("DOMContentLoaded", function(event) {
-  registerHandlebarsHelpers();
   createTable('#matrix');
   scrollToHash();
 });
-
-/**
- * Register custom Handlebars helpers.
- */
-function registerHandlebarsHelpers() {
-  Handlebars.registerHelper('clrfToBr', (str, args, options) => {
-    return str.replace(/(?:\r\n|\r|\n)/g, '<br>');
-  });
-}
 
 /**
  * Creates the table of brand and markets.
@@ -131,6 +121,8 @@ function updateMatrix(brand, market) {
       return;
     }
 
+    var localDate = window.Dashboard.localDate(data.lastRun)
+
     // Add link to failures.
     if (data.scenarios) {
       var count = Object.keys(data.scenarios).length;
@@ -139,14 +131,14 @@ function updateMatrix(brand, market) {
         float = 'float-left';
         var failed = jQuery('<div>').addClass('failed');
         jQuery(failed).appendTo(jQuery(matrixTarget));
-        var link = jQuery('<a>').attr('href', '#failures-' + brand + '-' + market).attr('title', 'Last run:' + data.lastRun).text(count);
+        var link = jQuery('<a>').attr('href', '#failures-' + brand + '-' + market).attr('title', 'Last run: ' + localDate).text(count);
         jQuery(link).appendTo(jQuery(matrixTarget + ' .failed'));
       }
     }
 
     // Update image.
     var src = '/modules/custom/dashboard/images/' + icon + '.png';
-    jQuery(matrixTarget + ' img').addClass(float).attr('title', 'Last run: ' + data.lastRun).attr('src', src);
+    jQuery(matrixTarget + ' img').addClass(float).attr('title', 'Last run: ' + localDate).attr('src', src);
 
     // Append failures.
     var html = handlebarsRenderer.render('dashboard.failures', data);

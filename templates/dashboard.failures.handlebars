@@ -3,7 +3,7 @@
   <div class="failure {{ this.brand }}-{{ this.market }}">
     {{#each this.scenarios as | scenarios scenarioTitle | }}
       <h3>{{scenarioTitle}} ({{ @root.brand }}-{{ @root.market }}) on {{ @root.device }}</h3>
-      <span class="date">Last run: {{ @root.lastRun }}</span>
+      <span class="date">Last run: {{localDate @root.lastRun }}</span>
       <div class="scenarios">
         {{#each scenarios as | scenario scenarioTitle | }}
         <div class="scenario">
@@ -28,7 +28,7 @@
             {{/each}}
           </div>
 
-          <div class="feature_file"><strong>Feature</strong> {{{ this.feature_file }}}</div>
+          <div class="feature_file"><strong>Feature file:</strong> {{{ this.feature_file }}}</div>
           <hr/>
         </div>
         {{/each}}
