@@ -1,4 +1,4 @@
-{{#if (eq this.event "scenario_failed")}}
+{{#if this.scenarios }}
 <section id="failures-{{ this.brand }}-{{ this.market }}">
   <div class="failure {{ this.brand }}-{{ this.market }}">
     {{#each this.scenarios as | scenarios scenarioTitle | }}
@@ -29,6 +29,7 @@
           </div>
 
           <div class="feature_file"><strong>Feature</strong> {{{ this.feature_file }}}</div>
+          <hr/>
         </div>
         {{/each}}
       </div>

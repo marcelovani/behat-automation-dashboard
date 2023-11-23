@@ -95,8 +95,12 @@ function createTable(container) {
  *   The market.
  */
 function updateMatrix(brand, market) {
+  // Keep only data for the last hour.
+  // @todo: Make this configurable.
+  var threshold = 60 * 60 * 1000;
   var matrixTarget = '#matrix .' + brand + '-' + market;
   let r = (Math.random() + 1).toString(36).substring(7);
+
   jQuery.getJSON('/sites/default/files/' + brand + '-' + market + '.json?rnd=' + r, function(data) {
     switch (data.event) {
       case 'suite_started':
@@ -120,15 +124,22 @@ function updateMatrix(brand, market) {
         console.error('Unknown event ' + data.event);
     }
 
+    // Check if the information is expired.
+    var now = new Date();
+    if (new Date(data.lastRun).getTime() + threshold < now.getTime()) {
+      console.log('Data expired for ' + brand + '-' + market);
+      return;
+    }
+
     // Add link to failures.
     if (data.scenarios) {
       var count = Object.keys(data.scenarios).length;
       var float = '';
       if (count > 0) {
         float = 'float-left';
-        var link = jQuery('<a>').attr('href', '#failures-' + brand + '-' + market).attr('title', 'Last run:' + data.lastRun).text(count);
         var failed = jQuery('<div>').addClass('failed');
         jQuery(failed).appendTo(jQuery(matrixTarget));
+        var link = jQuery('<a>').attr('href', '#failures-' + brand + '-' + market).attr('title', 'Last run:' + data.lastRun).text(count);
         jQuery(link).appendTo(jQuery(matrixTarget + ' .failed'));
       }
     }
@@ -176,8 +187,8 @@ function toIsoString(date) {
 function scrollToHash() {
   setTimeout(() => {
     var hash = document.URL.substr(document.URL.indexOf('#') + 1);
-    var el = jQuery(`a[name=${hash}]`);
-    if (el) {
+    var el = jQuery(`section[id=${hash}]`);
+    if (el && el.offset() && el.offset().top) {
       jQuery('html, body').animate({
         scrollTop: el.offset().top
       }, 'slow');
@@ -185,5 +196,5 @@ function scrollToHash() {
     else {
       console.log('Cannot scroll to hash');
     }
-  }, 2000);
+  }, 2500);
 }
