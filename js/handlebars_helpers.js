@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 function registerHandlebarsHelpers() {
   // Converts line breaks to HTML line breaks.
   Handlebars.registerHelper('clrfToBr', (str, args, options) => {
+    if (typeof str != 'string') {
+      return;
+    }
     return str.replace(/(?:\r\n|\r|\n)/g, '<br>');
   });
 
