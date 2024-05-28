@@ -30,6 +30,21 @@ Example post data:
 }
 ```
 
+## How to add to the project
+Add repositories in composer.json
+```
+    "repositories": {
+        "behat_automation_dashboard": {
+            "type": "vcs",
+            "url": "https://github.com/marcelovani/behat-automation-dashboard.git"
+        }
+    },
+```
+
+Request the project
+Example `composer require drupal/behat_automation_dashboard:dev-master`
+
+
 You can use [Behat Dashboard Notifier](https://github.com/marcelovani/behat-dashboard-notifier/) extension to do the POST requests.
 
 When the Dashboard receives a post request, it will generate Js files for the brand/market.
