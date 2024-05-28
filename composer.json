@@ -1,5 +1,5 @@
 {
-  "name": "drupal/automation_dashboard",
+  "name": "drupal/behat_automation_dashboard",
   "version": "1.0.0",
   "type": "drupal-module",
   "description": "Drupal Dashboard for Behat automation",
