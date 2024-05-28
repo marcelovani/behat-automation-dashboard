@@ -66,7 +66,7 @@ function createTable(container) {
       var td = jQuery('<td>').addClass('site').addClass(brand + '-' + market);
       jQuery(td).appendTo(tr);
       if (market.trim().length > 0) {
-        var img = jQuery('<img>').attr('src', '/modules/contrib/dashboard/images/yellow.png');
+        var img = jQuery('<img>').attr('src', '/modules/contrib/behat_automation_dashboard/images/yellow.png');
         jQuery(img).appendTo(td);
         updateMatrix(brand, market);
       }
@@ -137,7 +137,7 @@ function updateMatrix(brand, market) {
     }
 
     // Update image.
-    var src = '/modules/contrib/dashboard/images/' + icon + '.png';
+    var src = '/modules/contrib/behat_automation_dashboard/images/' + icon + '.png';
     jQuery(matrixTarget + ' img').addClass(float).attr('title', 'Last run: ' + localDate).attr('src', src);
 
     // Append failures.
