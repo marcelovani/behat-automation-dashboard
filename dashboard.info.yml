@@ -8,4 +8,4 @@ dependencies:
   - restui:restui
   - drupal:serialization
   - config_rewrite:config_rewrite
-  - handlebars:hanndlebars
+  - handlebars:handlebars
