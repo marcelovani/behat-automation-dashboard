@@ -24,19 +24,19 @@ class Dashboard extends ControllerBase
                       <h3>Legend</h3>
                       <ul>
                         <li class="yellow">
-                          <img src="/modules/custom/dashboard/images/yellow.png">
+                          <img src="/modules/contrib/dashboard/images/yellow.png">
                           <span>Jobs that do not have any updates in the last hour</span>
                         </li>
                         <li class="wip">
-                          <img src="/modules/custom/dashboard/images/wip.png">
+                          <img src="/modules/contrib/dashboard/images/wip.png">
                           <span>Jobs currently running without failures so far</span>
                         </li>
                         <li class="green">
-                          <img src="/modules/custom/dashboard/images/green.png">
+                          <img src="/modules/contrib/dashboard/images/green.png">
                           <span>All scenarios passed in the last hour</span>
                         </li>
                         <li class="red">
-                          <img src="/modules/custom/dashboard/images/red.png">
+                          <img src="/modules/contrib/dashboard/images/red.png">
                           <span>Scenarios that failed in the last hour</span>
                         </li>
                       </ul>
