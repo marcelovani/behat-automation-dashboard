@@ -1,7 +1,7 @@
 {
-  "name": "marcelovani/dashboard",
+  "name": "drupal/automation_dashboard",
   "version": "1.0.0",
-  "type": "library",
+  "type": "drupal-module",
   "description": "Drupal Dashboard for Behat automation",
   "license": "MIT",
   "authors": [
