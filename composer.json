@@ -1,0 +1,13 @@
+{
+  "name": "marcelovani/dashboard",
+  "version": "1.0.0",
+  "type": "library",
+  "description": "Drupal Dashboard for Behat automation",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Marcelo Vani",
+      "role": "Developer"
+    }
+  ]
+}
